@@ -1,0 +1,25 @@
+---
+title: "Leaflet Homework"
+author: "Jhonatan Zambrano"
+date: "3/1/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Map of PM2.5 in Bogota D.C
+
+There is a map where we referenciate PM 2.5 micrometer measurements on different sites in Bogota, Colombia on average in 2019.
+
+```{r}
+library(leaflet)
+df<-readRDS("data.RDS")
+m<-df%>%
+  leaflet()%>%
+  addTiles()%>%
+  addCircleMarkers(lng = df$LONGITUD, lat = df$LATITUD, radius = 2*df$media, popup = df$site, weight = 1)
+m
+```
+
